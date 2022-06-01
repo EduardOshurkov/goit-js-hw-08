@@ -9,8 +9,6 @@ const refs = {
 
 refs.form.addEventListener('submit', onFormSubmit);
 refs.form.addEventListener('input', throttle(onInputValue, 500));
-refs.input.addEventListener('input', onInputValue);
-refs.textarea.addEventListener('input', onTextareaValue);
 
 const STORAGE_KEY = 'feedback-form-state';
 let formData = {};
@@ -25,13 +23,11 @@ function onFormSubmit(event) {
     } else {
         console.log(formData);
     }
+    for (const key in formData) {
+    delete formData[key];
+  }
 }
 
-// function clearData(object) {
-//     for (const key in object) {
-//         delete object[key];
-// }
-// }
 
 function onInputValue(event) {
     formData[event.target.name] = event.target.value;
@@ -39,13 +35,6 @@ function onInputValue(event) {
 
     localStorage.setItem(STORAGE_KEY, inputValueForStorage);
 }
-
-function onTextareaValue(event) {
-    formData[event.target.name] = event.target.value;
-    const textareaValueForStorage = JSON.stringify(formData)
-    localStorage.setItem(STORAGE_KEY, textareaValueForStorage);
-}
-
 
 function savedForm() {
     formData = JSON.parse(localStorage.getItem(STORAGE_KEY));
