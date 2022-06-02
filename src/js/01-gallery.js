@@ -22,7 +22,7 @@ function galleryLightBox() {
 
 galleryLightBox();
 
-new SimpleLightbox('.gallery a', { captionDelay: 250, });
+new SimpleLightbox('.gallery a', { captionDelay: 110, });
 
 // document.addEventListener("DOMContentLoaded", galleryLightBox);
 
